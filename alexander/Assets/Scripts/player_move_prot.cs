@@ -17,6 +17,10 @@ public class player_move_prot : MonoBehaviour
     {
         PlayerMove();
         PlayerRaycast();
+        if (gameObject.GetComponent<Rigidbody2D>().velocity == new Vector2(0,0))
+        {
+            gameObject.GetComponent<Animator>().Rebind();
+        }
     }
 
     void PlayerMove()
@@ -74,12 +78,15 @@ public class player_move_prot : MonoBehaviour
     void PlayerRaycast()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
-        if (hit.distance < 0.9f && hit.collider.tag == "enemy")
+        if (hit.distance < 0.9f && hit.collider != null)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, 0);
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * bouncePower);
-
-            Destroy(hit.collider.gameObject);
+            if (hit.collider.tag == "enemy")
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, 0);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * bouncePower);
+                Destroy(hit.collider.gameObject);
+            }
+            
         }
     }
 
