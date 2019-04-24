@@ -19,6 +19,6 @@ public class Player_Health : MonoBehaviour
 
     void Die()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("grassy scene");
     }
 }

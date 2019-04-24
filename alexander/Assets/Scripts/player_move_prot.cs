@@ -11,12 +11,15 @@ public class player_move_prot : MonoBehaviour
     private float moveX;
     public bool isGrounded;
     public int bouncePower = 1500;
+    public float rayCastDist = 2.5f;
  
     // Update is called once per frame
     void Update()
     {
         PlayerMove();
         PlayerRaycast();
+
+        //animation controller
         if (gameObject.GetComponent<Rigidbody2D>().velocity == new Vector2(0,0))
         {
             gameObject.GetComponent<Animator>().Rebind();
@@ -33,7 +36,6 @@ public class player_move_prot : MonoBehaviour
             Jump();
         }
 
-        //animation
 
         //player direction
         if (moveX < 0.0f && facingRight == false)
@@ -78,7 +80,7 @@ public class player_move_prot : MonoBehaviour
     void PlayerRaycast()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
-        if (hit.distance < 0.9f && hit.collider != null)
+        if (hit.distance < rayCastDist && hit.collider != null)
         {
             if (hit.collider.tag == "enemy")
             {

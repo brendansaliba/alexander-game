@@ -20,7 +20,7 @@ public class Player_Score : MonoBehaviour
         playerScoreUI.gameObject.GetComponent<Text>().text = ("Scrore: " + (int)playerScore);
         if (timeLeft < 0.1)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("grassy scene");
         }
     }
 
